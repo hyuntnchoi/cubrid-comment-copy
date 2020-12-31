@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    </head>
+    <body>
+        <div>
+            [설명서]
+            1. 다음 쿼리를 큐브리드에서 실행해주세요
+                "SELECT class_name, attr_name, comment, data_type FROM db_attribute"
+            
+        </div>
+        <div id="result">
+        </div>
+        
+        <div>
+            <button id="btn">Click</button>
+        </div>
+
+        <div contenteditable
+             id="comments"
+             style="font:2rem/1.5 monospace; max-width:60rem; margin:0 auto; padding:4rem;">
+        </div>
+        
+        <!--
+            [logic explanation] 
+            0-1. create array to put final insert queries for comments
+            0-2. get DOM
+            1. count DIV elements
+            2. start for loop with dom count
+            3. check if 4th span exists
+            3-1. if exists, go to no.4
+            3-2. if not exists, go to no.5
+            4. make query & put into the list created in no.0
+            5. do next for loop
+        -->
+        <script>
+            
+            const btn = document.getElementById("btn");
+            var resultVal = "";
+
+            btn.addEventListener('click', event => {
+                // array to save final insert queries
+                var arr = [];
+
+                // get div length
+                //var divs = document.getElementsByTagName("div");
+                var divs = document.getElementById("comments").getElementsByTagName("div");
+                
+                makeQueries(divs, arr, resultVal);
+            });
+            
+            function makeQueries(elements, array, resultVal) {
+                var eleLen = elements.length;
+                console.log("div length : " + eleLen);
+                console.log(elements);
+            
+                for(var i = 0; i < eleLen; i++) {
+                    var curEle = elements[i].childNodes[0];
+                    var childs = curEle.childNodes;
+                    
+                    var exist = ifCommentExists(childs);
+
+                    if(exist) {
+                        // get contents
+                        var table = childs[2].textContent.trim();
+                        var column = childs[4].textContent.trim();
+                        var comment = childs[6].textContent.trim();
+                        var dataType = childs[8].textContent.trim();
+                        var query = "";
+                        
+                        // create insert query
+                        query = createQry(table, column, comment, dataType);
+                        
+                        // add query
+                        resultVal = resultVal + query;
+                    } else {
+                        // do nothing
+                    }  
+                }
+                
+                console.log("result:\n"+resultVal);
+                
+                var resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = resultVal;
+            }
+             
+
+            function ifCommentExists(divChilds) {
+                // get div's child nodes length
+                var len = divChilds.length;
+                
+                if(len == 10) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            function createQry(table, column, comment, dataType) {
+                console.log(`creating qry : ${table}, ${column}, ${comment}, ${dataType}`);
+
+                query = `ALTER TABLE ${table} MODIFY COLUMN ${column} ${dataType} COMMENT '${comment}';\n`;
+
+                return query;
+            }
+        </script>
+    </body>
+</html>
