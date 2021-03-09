@@ -6,14 +6,22 @@
         <div>
             [설명서]
             1. 다음 쿼리를 큐브리드에서 실행해주세요
-                "SELECT class_name, attr_name, comment, data_type FROM db_attribute"
-            
+            <br>
+               컬럼 코멘트 =>
+            <br>
+               SELECT class_name, attr_name, comment, data_type FROM db_attribute WHERE comment != ''
+            <br>
+               테이블 코멘트 =>
+            <br>
+               SELECT class_name, comment FROM db_class WHERE comment != '';
         </div>
+        
         <div id="result">
         </div>
         
         <div>
-            <button id="btn">Click</button>
+            <button id="btn1">Click(Comment for columns)</button>
+            <button id="btn2">Click(Comment for tables)</button>
         </div>
 
         <div contenteditable
@@ -35,18 +43,20 @@
         -->
         <script>
             
-            const btn = document.getElementById("btn");
             var resultVal = "";
+            const btn1 = document.getElementById("btn1");
+            const btn2 = document.getElementById("btn2");
 
-            btn.addEventListener('click', event => {
-                // array to save final insert queries
+            btn1.addEventListener('click', event => {
                 var arr = [];
-
-                // get div length
-                //var divs = document.getElementsByTagName("div");
                 var divs = document.getElementById("comments").getElementsByTagName("div");
-                
                 makeQueries(divs, arr, resultVal);
+            });
+
+            btn2.addEventListener('click', event => {
+                var arr = [];
+                var divs = document.getElementById("comments").getElementsByTagName("div");
+                makeQueriesForTableComment(divs, arr, resultVal);
             });
             
             function makeQueries(elements, array, resultVal) {
@@ -55,11 +65,9 @@
                 console.log(elements);
             
                 for(var i = 0; i < eleLen; i++) {
-                    var curEle = elements[i].childNodes[0];
-                    var childs = curEle.childNodes;
-                    
+                    var childs = elements[i].childNodes;
                     var exist = ifCommentExists(childs);
-
+                    
                     if(exist) {
                         // get contents
                         var table = childs[2].textContent.trim();
@@ -70,7 +78,8 @@
                         
                         // create insert query
                         query = createQry(table, column, comment, dataType);
-                        
+                        console.log(query);
+
                         // add query
                         resultVal = resultVal + query;
                     } else {
@@ -84,11 +93,38 @@
                 resultDiv.innerHTML = resultVal;
             }
              
+            function makeQueriesForTableComment(elements, array, resultVal) {
+                var eleLen = elements.length;
+                console.log("div length : " + eleLen);
+                console.log(elements);
+            
+                for(var i = 0; i < eleLen; i++) {
+                    var childs = elements[i].childNodes;
+                    // 아래 주석 처리
+                    // 일단 현재는 무조건 코멘트 있는 것만 애초부터 조회해서 필요 없음
+                    // var exist = ifCommentExists(childs);
+                    
+                    // get contents
+                    var table = childs[2].textContent.trim();
+                    var comment = childs[4].textContent.trim();
+                    var query = "";
+                    
+                    // create insert query
+                    query = createQryForTableComment(table, comment);
+
+                    // add query
+                    resultVal = resultVal + query;
+                }
+                
+                var resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = resultVal;
+            }
 
             function ifCommentExists(divChilds) {
                 // get div's child nodes length
                 var len = divChilds.length;
-                
+                console.log('len:' + len);
+
                 if(len == 10) {
                     return true;
                 } else {
@@ -100,6 +136,12 @@
                 console.log(`creating qry : ${table}, ${column}, ${comment}, ${dataType}`);
 
                 query = `ALTER TABLE ${table} MODIFY COLUMN ${column} ${dataType} COMMENT '${comment}';\n`;
+
+                return query;
+            }
+
+            function createQryForTableComment(table, comment) {
+                query = `ALTER TABLE ${table} COMMENT = '${comment}';\n`;
 
                 return query;
             }
