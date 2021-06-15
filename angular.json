@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "cubrid-comment-copy"
+    }
+  },
+  "defaultProject": "cubrid-comment-copy",
+  "cli": {
+    "analytics": false
+  }
 }
