@@ -1,12 +1,3 @@
-<div>
-     [설명서]<br>
-     1. 다음 쿼리를 큐브리드 매니저에서 실행해주세요<br>
-     "SELECT class_name, attr_name, comment, data_type FROM db_attribute"<br>
-     2. 쿼리 결과문을 복사 후 아래에 붙여넣기 해주세요<br>
-     3. Create 버튼을 클릭해 주세요<br>
-     4. 결과 쿼리를 복사 후 큐브리드 매니저에서 실행해 주세요
-</div>
-
 <div contenteditable
      #commentEditor
      style="font:2rem/1.5 monospace; max-width:60rem; margin:0 auto; padding:4rem;">
@@ -16,5 +7,5 @@
 	<button (click)="makeQueries()">Create</button>
 </div>
 
-<div id="resultScreen">
+<div #resultScreen>
 </div>

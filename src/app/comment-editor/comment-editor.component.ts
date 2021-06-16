@@ -8,9 +8,11 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 })
 export class CommentEditorComponent {
 	@ViewChild("commentEditor") commentEditor: ElementRef;
+	@ViewChild("resultScreen") resultScreen: ElementRef;
+
 	constructor() {}
 
-	resultQry: string;
+	private resultQry: string = "";
 
 	makeQueries(): void {
 		let columns = this.commentEditor.nativeElement.getElementsByTagName("div");
@@ -19,7 +21,7 @@ export class CommentEditorComponent {
 		console.log("columns length?", columnLen);
 
 		for(let i = 0; i < columnLen; i++) {
-			let curColumn = columns[i].childNodes[0];
+			let curColumn = columns[i];
 			console.log("current column?", curColumn);
 			let childs = curColumn.childNodes;
 			console.log("child nodes?", childs);
@@ -46,13 +48,13 @@ export class CommentEditorComponent {
 			}
 		}
 
-		console.log(this.resultQry);
+		this.displayResult(this.resultQry);
 	}
 
 	ifCommentExists(divChilds: Array<string>): boolean {
 		var len = divChilds.length;
 		
-		if(len == 10) {
+		if(len >= 9) {
 			return true;
 		} else {
 			return false;
@@ -65,6 +67,12 @@ export class CommentEditorComponent {
 		let query = `ALTER TABLE ${table} MODIFY COLUMN ${column} ${dataType} COMMENT '${comment}';\n`;
 
 		return query;
+	}
+
+	displayResult(resultQry: string) {
+		console.log("======================");
+		console.log(resultQry);
+		this.resultScreen.nativeElement.innerHTML = resultQry;
 	}
 	
 }
