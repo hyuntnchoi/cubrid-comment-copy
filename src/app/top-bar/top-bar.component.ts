@@ -6,22 +6,26 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 	styleUrls: ['./top-bar.component.css']
 })
 export class TopBarComponent {
-	private show: boolean = true;
+	private valid: boolean = true;
 
 	constructor() {}
 
+	isValid(): boolean {
+		return this.valid;
+	}
+
 	clickBtn1(): void {
 		alert('컬럼 코멘트를 복사하는 기능입니다');
-		this.changeManual();
+		this.changeBtnStatus();
 	}
 	
 	clickBtn2(): void {
 		alert('아직 지원하지 않는 기능입니다');
-		this.changeManual();
+		this.changeBtnStatus();
 	}
 
-	changeManual(): void {
-		this.show = !this.show;
+	changeBtnStatus(): void {
+		this.valid = !this.valid;
 		// let manuals = eleRef.nativeElement.querySelectorAll('.manual');
 		// console.log(manuals);
 		// if (manuals.style.display === "none") {
