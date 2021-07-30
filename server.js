@@ -1,7 +1,10 @@
 var express = require('express');
 var app = express();
+
 app.use(express.static('dist/cubrid-comment-copy'));
+
 app.get('/', function (req, res,next) {
-res.redirect('/');
+    res.redirect('/');
 });
+
 app.listen(8080)
