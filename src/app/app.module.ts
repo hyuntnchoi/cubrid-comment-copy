@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { CommentEditorComponent } from './comment-editor/comment-editor.component';
+import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { CommentEditorComponent } from './comment-editor/comment-editor.componen
   declarations: [
     AppComponent,
     TopBarComponent,
-    CommentEditorComponent
+    CommentEditorComponent,
+    BottomBarComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
