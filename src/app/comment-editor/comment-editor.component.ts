@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, Renderer2, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
 	selector: 'comment-editor',
@@ -9,14 +9,16 @@ export class CommentEditorComponent {
 	@ViewChild("commentEditor") commentEditor: ElementRef;
 	@ViewChild("resultScreen") resultScreen: ElementRef;
 
-	constructor() {}
+	constructor(private renderer:Renderer2) {
+	}
 
-	private resultQry: string = "";
+	// private resultQry: string = "";
 
 	makeQueries(): void {
 		let columns = this.commentEditor.nativeElement
 							.getElementsByTagName("div");
 		let columnLen = columns.length;
+		let resultQry: string = "";
 
 		for(let i = 0; i < columnLen; i++) {
 			let curColumn = columns[i];
@@ -33,10 +35,10 @@ export class CommentEditorComponent {
 			query = this.createQry(table, column, comment, dataType);
 
 			// add query
-			this.resultQry = this.resultQry + query;
+			resultQry = resultQry + query;
 		}
 
-		this.displayResult(this.resultQry);
+		this.displayResult(resultQry);
 	}
 
 	createQry(table: string, column: string, comment: string, dataType: string): string {
@@ -46,6 +48,7 @@ export class CommentEditorComponent {
 	}
 
 	displayResult(resultQry: string) {
-		this.resultScreen.nativeElement.innerHTML = resultQry;
+		let screenEle = this.resultScreen.nativeElement;
+		this.renderer.setProperty(screenEle, 'innerHTML', resultQry)
 	}
 }
