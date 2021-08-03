@@ -26,13 +26,5 @@ export class TopBarComponent {
 
 	changeBtnStatus(): void {
 		this.valid = !this.valid;
-		// let manuals = eleRef.nativeElement.querySelectorAll('.manual');
-		// console.log(manuals);
-		// if (manuals.style.display === "none") {
-		// 	manuals.style.display = "block";
-		// } else {
-		// 	manuals.style.display = "none";
-		// }
 	} 
-
 }
