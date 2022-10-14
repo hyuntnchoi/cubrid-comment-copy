@@ -1,31 +1,15 @@
-# CubridCommentCopy
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
+### PURPOSE  
+To copy comments in tables of Cubrid database
 
-## Running website
+# HOW TO USE  
+1. Download the html file and execute using Chrome or other browser  
+2-1. If you want to copy comments for columns in table,  
+     copy first qeury and execute in Cubrid Manager  
+2-2. If you wnat to copy comments for tables,  
+     copy second query and execute in Cubrid Manager  
+3. Paste the query result  
+4-1. If 2-1, click first button  
+4-2. If 2-2, click second button  
+5. Copy the queries after button click and execute in Cubrid Manager
 
-https://cubrid-comment-copy-wwowx4iujq-uc.a.run.app
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
