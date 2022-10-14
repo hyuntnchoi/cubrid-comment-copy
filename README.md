@@ -2,7 +2,7 @@
 ### PURPOSE  
 To copy comments in tables of Cubrid database
 
-# HOW TO USE  
+### HOW TO USE  
 1. Download the html file and execute using Chrome or other browser  
 2-1. If you want to copy comments for columns in table,  
      copy first qeury and execute in Cubrid Manager  
