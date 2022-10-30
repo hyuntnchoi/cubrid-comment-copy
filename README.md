@@ -1,15 +1,20 @@
 
-### PURPOSE  
-To copy comments in tables of Cubrid database
+### PURPOSE
+To copy comments of tables or comments of columns in Cubrid database.
 
-### HOW TO USE  
-- Download the html file and execute using Chrome or other browser  
-- a. If you want to copy comments for columns in table,  
-     copy first qeury and execute in Cubrid Manager  
-  b. If you wnat to copy comments for tables,  
-     copy second query and execute in Cubrid Manager  
-- Paste the query result  
-- If a, click first button  
-  If b, click second button  
-- Copy the queries after button click and execute in Cubrid Manager
+### HOW TO START
+- > ng build
+- > ng serve
+- > address: http://localhost:4200
+
+### HOW TO USE
+- a. To copy comments for columns in table
+     1. Click "Column Comment" button.
+     2. Copy the qeury and execute in Cubrid Manager.
+     3. Copy the result in Cubrid Manager.
+     4. Paste the query result in editor space in web.
+     5. Click "Create" button.
+     6. Copy and execute the generated queries in Cubrid Manager.
+  b. To copy comments for tables
+     (Not supported yet)
 
