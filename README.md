@@ -16,5 +16,5 @@ To copy comments of tables or comments of columns in Cubrid database.
      5. Click "Create" button.
      6. Copy and execute the generated queries in Cubrid Manager.
 - To copy comments for tables
-     (Not supported yet)
+    (Not supported yet)
 
